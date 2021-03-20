@@ -57,7 +57,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   String text = '';
-  bool verticalMode = true;
+  bool horizontalMode = true;
 
   double screenWidth = 0;
   final breakWidth = 800;
@@ -187,9 +187,9 @@ class _MainPageState extends State<MainPage> {
           SizedBox(
             width: 200,
             child: SwitchListTile.adaptive(
-              value: verticalMode,
-              onChanged: (bool value) => setState(() => verticalMode = value),
-              title: Text('Vertical disposition'),
+              value: horizontalMode,
+              onChanged: (bool value) => setState(() => horizontalMode = value),
+              title: Text('Horizontal disposition'),
             ),
           ),
       ],
@@ -276,7 +276,7 @@ class _MainPageState extends State<MainPage> {
         child: text.length > 0
             ? Padding(
                 padding: EdgeInsets.only(
-                    top: verticalMode ? 0 : 10, left: verticalMode ? 10 : 0),
+                    top: horizontalMode ? 0 : 10, left: horizontalMode ? 10 : 0),
                 child: MarkdownWidget(
                   data: text,
                   styleConfig: StyleConfig(
@@ -293,9 +293,9 @@ class _MainPageState extends State<MainPage> {
               )
             : SizedBox.shrink());
 
-    if (screenWidth < breakWidth) setState(() => verticalMode = false);
+    if (screenWidth < breakWidth) setState(() => horizontalMode = false);
 
-    if (verticalMode)
+    if (horizontalMode)
       return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
