@@ -11,4 +11,7 @@ Note that some texts should be changed.
 
 The editor is not perfect, especialy the toolbar (with bold, italic, etc).
 
+Bugs:
+- Some images cannot be displayed (CORS default)
+
 P.S : This file was made with and for Edity =^-^=

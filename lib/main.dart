@@ -2,8 +2,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'dart:convert';
-import 'package:markdown_widget/markdown_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           border: OutlineInputBorder(),
         ),
         textTheme: ThemeData.dark().textTheme.copyWith(
-              bodyText2: TextStyle(fontSize: 16),
+              bodyText2: TextStyle(fontSize: 16, color: Colors.white),
             ),
       ),
       home: MainPage(),
@@ -278,21 +278,11 @@ class _MainPageState extends State<MainPage> {
                 padding: EdgeInsets.only(
                     top: horizontalMode ? 0 : 10,
                     left: horizontalMode ? 10 : 0),
-                child: MarkdownWidget(
-                  data: text,
-                  styleConfig: StyleConfig(
-                    titleConfig: TitleConfig(divider: SizedBox.shrink()),
-                    pConfig: PConfig(
-                        selectable: true,
-                        onLinkTap: (String link) async {
-                          if (await canLaunch(link)) launch(link);
-                        }),
-                    markdownTheme:
-                        Theme.of(context).brightness == Brightness.light
-                            ? MarkdownTheme.lightTheme
-                            : MarkdownTheme.darkTheme,
-                  ),
-                ),
+                child: Markdown(
+                    data: text,
+                    onTapLink: (String title, String link, String other) async {
+                      if (await canLaunch(link)) launch(link);
+                    }),
               )
             : SizedBox.shrink());
 
