@@ -276,14 +276,17 @@ class _MainPageState extends State<MainPage> {
         child: text.length > 0
             ? Padding(
                 padding: EdgeInsets.only(
-                    top: horizontalMode ? 0 : 10, left: horizontalMode ? 10 : 0),
+                    top: horizontalMode ? 0 : 10,
+                    left: horizontalMode ? 10 : 0),
                 child: MarkdownWidget(
                   data: text,
                   styleConfig: StyleConfig(
                     titleConfig: TitleConfig(divider: SizedBox.shrink()),
-                    pConfig: PConfig(onLinkTap: (String link) async {
-                      if (await canLaunch(link)) launch(link);
-                    }),
+                    pConfig: PConfig(
+                        selectable: true,
+                        onLinkTap: (String link) async {
+                          if (await canLaunch(link)) launch(link);
+                        }),
                     markdownTheme:
                         Theme.of(context).brightness == Brightness.light
                             ? MarkdownTheme.lightTheme
