@@ -196,7 +196,18 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  dynamic editorAndVisualizer() {
+  void toolbarAddFormat(String format) {
+    final textSelection = textEditingController.selection;
+    if (!textSelection.isValid) return changeText(text + '$format$format');
+
+    List<String> characters = text.characters.toList();
+    characters.insert(textSelection.end, format);
+    characters.insert(textSelection.start, format);
+
+    changeText(characters.join());
+  }
+
+  Widget editorAndVisualizer() {
     void addLink() {
       String title = '';
       String link = '';
@@ -261,9 +272,9 @@ class _MainPageState extends State<MainPage> {
             scrollDirection: Axis.horizontal,
             children: [
               toolboxButton(
-                  Icons.format_bold, 'Bold', () => changeText(text + '****')),
+                  Icons.format_bold, 'Bold', () => toolbarAddFormat('**')),
               toolboxButton(
-                  Icons.format_italic, 'Italic', () => changeText(text + '__')),
+                  Icons.format_italic, 'Italic', () => toolbarAddFormat('*')),
               toolboxButton(Icons.link, 'Add a link', addLink),
             ],
           ),
